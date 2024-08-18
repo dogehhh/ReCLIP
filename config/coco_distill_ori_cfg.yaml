@@ -1,0 +1,35 @@
+DATASET:
+  NAME: 'stuff'
+  NUM_CLASSES: 27
+  DATAROOT: 'data/coco_stuff164k/'
+  SCALE: [2048, 512]
+  RATIO_RANGE: [0.5, 2.0]
+  CROP_SIZE: [512, 512]
+  CAT_MAX_RATIO: 0.75
+  IMG_NORM_CFG:
+    MEAN: [123.675, 116.28, 103.53]
+    STD: [58.395, 57.12, 57.375]
+    RGB: True
+  TEXT_WEIGHT: 'text/stuff27_ViT16_clip_text.pth'
+  REDUCE_ZERO_LABEL: FALSE
+
+MODEL:
+  FEATURE_EXTRACTOR: 'vit'
+  TEXT_CHANNEL: 512
+  VISUAL_CHANNEL: 768
+  TRAINING: False
+
+TRAIN:
+  BATCH_SIZE: 16
+  MAX_EPOCH: 50
+  LR: 0.01
+
+TEST:
+  BATCH_SIZE: 1
+  PD: 0.95
+
+EVAL_METRIC: "miou"
+LOAD_PATH: "experiments/coco_rectification/best_weight.pth"
+LOAD_DISTILL_PATH: "experiments/coco_distill/best_weight.pth"
+SAVE_DIR: "experiments/coco_distill/"
+NUM_WORKERS: 4

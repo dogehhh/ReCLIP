@@ -1,0 +1,36 @@
+DATASET:
+  NAME: 'context'
+  NUM_CLASSES: 59
+  DATAROOT: 'data/VOCdevkit/VOC2010/'
+  SCALE: [520, 520]
+  RATIO_RANGE: [0.5, 2.0]
+  CROP_SIZE: [480, 480]
+  CAT_MAX_RATIO: 0.75
+  IMG_NORM_CFG:
+    MEAN: [123.675, 116.28, 103.53]
+    STD: [58.395, 57.12, 57.375]
+    RGB: True
+  TEXT_WEIGHT: 'text/context_ViT16_clip_text.pth'
+  K: 6
+  THRESHOLD: 20
+  REDUCE_ZERO_LABEL: TRUE
+  IGNORE_INDEX: 255
+
+
+MODEL:
+  FEATURE_EXTRACTOR: 'vit'
+  TEXT_CHANNEL: 512
+  VISUAL_CHANNEL: 768
+  TRAINING: True
+
+TRAIN:
+  BATCH_SIZE: 16
+  MAX_EPOCH: 150
+  LR: 0.01
+
+TEST:
+  BATCH_SIZE: 1
+
+EVAL_METRIC: "miou"
+SAVE_DIR: "experiments/context_rectification/"
+NUM_WORKERS: 4

@@ -1,0 +1,42 @@
+DATASET:
+  NAME: 'voc'
+  NUM_CLASSES: 20
+  DATAROOT: 'data/VOCdevkit/VOC2012/'
+  SCALE: [2048, 512]
+  RATIO_RANGE: [0.5, 2.0]
+  CROP_SIZE: [512, 512]
+  CAT_MAX_RATIO: 0.75
+  IMG_NORM_CFG:
+    MEAN: [123.675, 116.28, 103.53]
+    STD: [58.395, 57.12, 57.375]
+    RGB: True
+  TEXT_WEIGHT: 'text/voc_ViT16_clip_text.pth'
+  THRESHOLD: 23
+  REDUCE_ZERO_LABEL: TRUE
+  PALETTE: [[128, 0, 0], [0, 128, 0], [128, 128, 0], [0, 0, 128],
+               [128, 0, 128], [0, 128, 128], [128, 128, 128], [64, 0, 0],
+               [192, 0, 0], [64, 128, 0], [192, 128, 0], [64, 0, 128],
+               [192, 0, 128], [64, 128, 128], [192, 128, 128], [0, 64, 0],
+               [128, 64, 0], [0, 192, 0], [128, 192, 0], [0, 64, 128]]
+  IGNORE_INDEX: 255
+
+MODEL:
+  FEATURE_EXTRACTOR: 'vit'
+  TEXT_CHANNEL: 512
+  VISUAL_CHANNEL: 768
+  TRAINING: True
+
+TRAIN:
+  BATCH_SIZE: 16
+  MAX_EPOCH: 100
+  LR: 0.01
+
+TEST:
+  BATCH_SIZE: 1
+  PD: 0.95
+
+EVAL_METRIC: "miou"
+LOAD_PATH: "experiments/checkpoints/voc_rectification/voc_rectification.pth"
+LOAD_DISTILL_PATH: "experiments/checkpoints/voc_distill/voc_distill.pth"
+SAVE_DIR: "experiments/voc_distill/"
+NUM_WORKERS: 4
