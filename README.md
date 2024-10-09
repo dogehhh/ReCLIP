@@ -78,7 +78,7 @@ python utils/prompt_engineering.py --model ViT16 --class-set voc
 ##### Step 2 Extract Image-level Multi-label Hypothesis
 
 ```python
-python tools/pseudo_label.py --cfg 'config/voc_train_ori_cfg.yaml' --model 'RECLIPPP'
+python tools/pseudo_class.py --cfg 'config/voc_train_ori_cfg.yaml' --model 'RECLIPPP'
 # The Image-level Multi-label Hypothesis will be saved at 'text/voc_pseudo_label_ReCLIPPP.json'
 # Options for dataset: voc, context, ade, cityscapes, coco
 # Options for model: RECLIPPP(ReCLIP++), ReCLIP(ReCLIP)
