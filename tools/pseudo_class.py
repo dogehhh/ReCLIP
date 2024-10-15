@@ -234,6 +234,6 @@ if __name__ == '__main__':
 
     _, _, train_images, train_labels, _, _, _, pseudo_classes = read_file_list(cfg)
     if args.model_name == 'RECLIPPP':
-        ReCLIPPP(train_images, train_labels, cfg, window_size=(w, w), step_size=r)
+        ReCLIPPP(train_images, train_labels, cfg, window_size=(w, w), step_size=s)
     else:
         ReCLIP(train_images, train_labels, cfg)
