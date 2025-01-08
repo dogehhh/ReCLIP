@@ -96,6 +96,10 @@ def train(rank, world_size):
     optimizer = optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), lr=cfg.TRAIN.LR, momentum=0.9,
                           weight_decay=0.0005)
     max_epoch = cfg.TRAIN.MAX_EPOCH
+    if cfg.TRAIN.EPOCH >= 0:
+        stop_epoch = cfg.TRAIN.EPOCH
+    else:
+        stop_epoch = max_epoch
     c_num = cfg.DATASET.NUM_CLASSES
     best_iou = 0.0
     for epoch in range(max_epoch):
@@ -168,7 +172,8 @@ def train(rank, world_size):
                 if avg > best_iou:
                     best_iou = avg
                     torch.save(model.state_dict(), cfg.SAVE_DIR + 'best_weight.pth')
-
+        if epoch == stop_epoch:
+            break
     log.close()
 
 

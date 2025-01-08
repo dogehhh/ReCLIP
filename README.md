@@ -95,9 +95,8 @@ python tools/train.py --cfg 'config/voc_train_ori_cfg.yaml' --model 'RECLIPPP'
 ##### Step 4 Distillation Stage, e.g.,
 
 ```python
-python tools/distill.py --cfg 'config/voc_distill_ori_cfg.yaml' --model 'RECLIPPP'
+python tools/distill.py --cfg 'config/voc_distill_ori_cfg.yaml'
 # Options for dataset: voc, context, ade, cityscapes, coco
-# Options for model: RECLIPPP(ReCLIP++), ReCLIP(ReCLIP)
 ```
 
 
@@ -115,9 +114,8 @@ python tools/test.py --cfg 'config/voc_test_ori_cfg.yaml' --model 'RECLIPPP'
 ##### Evaluation for Distillation Stage, e.g.,
 
 ```python
-python tools/distill_val.py --cfg 'config/voc_distill_ori_cfg.yaml' --model 'RECLIPPP'
+python tools/distill_val.py --cfg 'config/voc_distill_ori_cfg.yaml'
 # Options for dataset: voc, context, ade, cityscapes, coco
-# Options for model: RECLIPPP(ReCLIP++), ReCLIP(ReCLIP)
 ```
 
 
@@ -136,13 +134,13 @@ python tools/distill_val.py --cfg 'config/voc_distill_ori_cfg.yaml' --model 'REC
 
 ##### ReCLIP++
 
-|    Dataset     |                        Rectification                         |                         Distillation                         |
-| :------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-|   PASCAL VOC   | [73.5](https://drive.google.com/file/d/1XvFJQ74xDkioQtMY9LMBYXxghhYZuLtO/view?usp=drive_link) | [79.2](https://drive.google.com/file/d/1rB17KIcAM0T7aBmS38IpgoebUw3Xj7Wo/view?usp=drive_link) |
-| PASCAL Context | [34.0](https://drive.google.com/file/d/1r8b3U3i9z-_Qo7GGX8kre0WOzruVym-X/view?usp=sharing) | [34.5](https://drive.google.com/file/d/1AH5zIWRx7iLSct4z0uokK_jhGwC4wtpS/view?usp=sharing) |
-|     ADE20K     | [13.5](https://drive.google.com/file/d/10GcLi-rh7wAgcP09TueWuBBuqoimEiG8/view?usp=drive_link) | [14.5](https://drive.google.com/file/d/1lSHivA9_MwMBK7qXgrzXg5TLkytIgRJ-/view?usp=sharing) |
-|   Cityscapes   | [21.7](https://drive.google.com/file/d/1CcIGkPzRLK0rV2jV2CbJH3tEsbGBwUvG/view?usp=drive_link) | [26.9](https://drive.google.com/file/d/1exHb-cX2gIkaANATohrfg1CRzBbZ6xhm/view?usp=sharing) |
-|   COCO Stuff   | [20.9](https://drive.google.com/file/d/1oYdTp998sUEy7dvWRfKeyo2iIbGvXEen/view?usp=drive_link) | [23.2](https://drive.google.com/file/d/1JyDOD-ugut6rbjDFAtbtfYMPvyqhnRwC/view?usp=sharing) |
+|    Dataset     |                        Rectification                         |
+| :------------: | :----------------------------------------------------------: |
+|   PASCAL VOC   | [85.4](https://drive.google.com/file/d/1FjTNj8PPGlce4xAQIXwjhi020glX3fSW/view?usp=drive_link) |
+| PASCAL Context | [36.1](https://drive.google.com/file/d/1gYfh2fY5EyWCH8RXLgEq-bzcGToT40SM/view?usp=drive_link) |
+|     ADE20K     | [16.4](https://drive.google.com/file/d/1p1b7WaaFHiNbq6ssvY1KZgqJ9G5XUKBr/view?usp=drive_link) |
+|   Cityscapes   | [26.5](https://drive.google.com/file/d/18Hdorz5nbLS5DFbXFcXKvgknzyD0W4sQ/view?usp=drive_link) |
+|   COCO Stuff   | [23.8](https://drive.google.com/file/d/1kqvNi_2J-IE0Tg9Rs2T2kkM5S_KRZsUz/view?usp=drive_link) |
 
 
 

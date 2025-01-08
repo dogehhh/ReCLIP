@@ -7,7 +7,7 @@ from PIL import Image
 
 
 from config.configs import cfg_from_file
-from model.model import RECLIPPP_DISTILL, ReCLIP_DISTILL
+from model.model import ReCLIP_DISTILL
 from utils.test_mIoU import mean_iou
 from utils.preprocess import val_preprocess, preprocess, read_file_list, prepare_dataset_cls_tokens
 
@@ -23,7 +23,7 @@ def get_parser():
                         default='config/voc_distill_ori_cfg.yaml', type=str)
     parser.add_argument('--model', dest='model_name',
                         help='model name',
-                        default='RECLIPPP', type=str)
+                        default='RECLIP', type=str)
     args = parser.parse_args()
     return args
 
@@ -36,10 +36,7 @@ def test():
         cfg)
     cls_name_token, text = prepare_dataset_cls_tokens(cfg)
     text_embeddings = torch.load(cfg.DATASET.TEXT_WEIGHT)
-    if args.model_name == 'RECLIPPP':
-        model = RECLIPPP_DISTILL(clip_model, cfg, cls_name_token, text_categories=cfg.DATASET.NUM_CLASSES, text_channels=512, text_embeddings=text_embeddings)
-    else:
-        model = ReCLIP_DISTILL(clip_model, cfg, cls_name_token, text_categories=cfg.DATASET.NUM_CLASSES, text_channels=512, text_embeddings=text_embeddings)
+    model = ReCLIP_DISTILL(clip_model, cfg, cls_name_token, text_categories=cfg.DATASET.NUM_CLASSES, text_channels=512, text_embeddings=text_embeddings)
     distill_weight = torch.load(cfg.LOAD_DISTILL_PATH)
     model.load_state_dict(distill_weight, strict=True)
     model = model.to(device)
@@ -61,12 +58,6 @@ def test():
             output = model(img, label, train=False, filenames=val_filenames[idx], text=text)
 
             # pd
-            if args.model_name == 'RECLIPPP':
-                N, C, H, W = output.shape
-                _output = F.softmax(output*2, dim=1)
-                max_cls_conf = _output.view(N, C, -1).max(dim=-1)[0]
-                selected_cls = (max_cls_conf < cfg.TEST.PD)[:, :, None, None].expand(N, C, H, W)
-                output[selected_cls] = -100
             output = F.interpolate(output, shape, None, 'bilinear', False).reshape(1, c_num, shape[0], shape[1])
             output = F.interpolate(output, ori_shape, None, 'bilinear', False).reshape(1, c_num, ori_shape[0], ori_shape[1])
             output = F.softmax(output, dim=1)

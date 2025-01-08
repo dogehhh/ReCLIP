@@ -31,8 +31,9 @@ cfg.MODEL.TRAINING = False
 
 cfg.TRAIN = edict()
 cfg.TRAIN.BATCH_SIZE = 1
-cfg.TRAIN.MAX_EPOCH = 0
-cfg.TRAIN.MAX_ITER=0
+cfg.TRAIN.MAX_EPOCH = 50
+cfg.TRAIN.EPOCH = 0
+cfg.TRAIN.MAX_ITER = 0
 cfg.TRAIN.LR = 0
 cfg.TRAIN.LOG = ''
 

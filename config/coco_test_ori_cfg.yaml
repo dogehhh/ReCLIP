@@ -7,8 +7,8 @@ DATASET:
   CROP_SIZE: [512, 512]
   CAT_MAX_RATIO: 0.75
   IMG_NORM_CFG:
-    MEAN: [123.675, 116.28, 103.53]
-    STD: [58.395, 57.12, 57.375]
+    MEAN: [ 122.771, 116.746, 104.094 ]
+    STD: [ 68.501, 66.632, 70.323 ]
     RGB: True
   TEXT_WEIGHT: 'text/stuff27_ViT16_clip_text.pth'
   REDUCE_ZERO_LABEL: FALSE
@@ -21,7 +21,7 @@ MODEL:
 
 TEST:
   BATCH_SIZE: 1
-  PD: 0.9
+  PD: 0.95
 
 EVAL_METRIC: "miou"
 LOAD_PATH: "experiments/coco_rectification/best_weight.pth"
