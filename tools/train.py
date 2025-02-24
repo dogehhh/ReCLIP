@@ -80,7 +80,7 @@ def train(rank, world_size):
 
     train_data = Train(cfg)
     train_sampler = torch.utils.data.distributed.DistributedSampler(train_data)
-    train_loader = DataLoader(dataset=train_data, shuffle=False, num_workers=cfg.NUM_WORKERS, pin_memory=True, sampler=train_sampler)
+    train_loader = DataLoader(dataset=train_data, shuffle=False, num_workers=cfg.NUM_WORKERS, pin_memory=True, sampler=train_sampler, batch_size=batch_size)
 
     if args.model_name == 'RECLIPPP':
         model = RECLIPPP(cfg=cfg, clip_model=clip_model, rank=rank, zeroshot_weights=text_weight)
