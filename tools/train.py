@@ -18,8 +18,6 @@ import torch.multiprocessing as mp
 import sys
 
 import os
-os.environ['MASTER_ADDR'] = 'localhost'
-os.environ['MASTER_PORT'] = '12325'
 
 
 from config.configs import cfg_from_file
