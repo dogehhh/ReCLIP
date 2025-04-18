@@ -177,6 +177,8 @@ def ReCLIPPP(images, labels, cfg, window_size, step_size):
         cls_dict = {}
         temp = []
         # 遍历窗口的所有位置
+        window_size = list(map(int, window_size))
+        step_size = int(step_size)
         for y in range(0, height - window_size[1], step_size):
             for x in range(0, width - window_size[0], step_size):
                 # 使用crop方法裁剪图像
