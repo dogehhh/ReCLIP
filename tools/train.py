@@ -25,6 +25,12 @@ from model.model import RECLIPPP, ReCLIP
 from utils.test_mIoU import mean_iou
 from utils.preprocess import val_preprocess, preprocess, read_file_list, prepare_dataset_cls_tokens
 
+def custom_collate_fn(batch):
+    imgs, labels, metas, filenames, pseudo_classes = zip(*batch)
+    imgs = torch.stack(imgs)
+    labels = torch.stack(labels)
+    return imgs, labels, metas, filenames, pseudo_classes
+    
 
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -80,8 +86,8 @@ def train(rank, world_size):
 
     train_data = Train(cfg)
     train_sampler = torch.utils.data.distributed.DistributedSampler(train_data)
-    train_loader = DataLoader(dataset=train_data, shuffle=False, num_workers=cfg.NUM_WORKERS, pin_memory=True, sampler=train_sampler, batch_size=cfg.TRAIN.BATCH_SIZE)
-
+    train_loader = DataLoader(dataset=train_data, shuffle=False, num_workers=cfg.NUM_WORKERS, pin_memory=True, sampler=train_sampler, batch_size=cfg.TRAIN.BATCH_SIZE, collate_fn=custom_collate_fn)
+    
     if args.model_name == 'RECLIPPP':
         model = RECLIPPP(cfg=cfg, clip_model=clip_model, rank=rank, zeroshot_weights=text_weight)
         model = torch.nn.parallel.DistributedDataParallel(model.cuda(), device_ids=[rank], output_device=rank,
