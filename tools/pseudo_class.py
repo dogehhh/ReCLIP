@@ -176,16 +176,13 @@ def ReCLIPPP(images, labels, cfg, window_size, step_size):
         width, height = img.size
         cls_dict = {}
         temp = []
-        # 遍历窗口的所有位置
         window_size = list(map(int, window_size))
         step_size = int(step_size)
         for y in range(0, height - window_size[1], step_size):
             for x in range(0, width - window_size[0], step_size):
-                # 使用crop方法裁剪图像
                 box = (x, y, x + window_size[0], y + window_size[1])
 
                 cropped_img = img.crop(box)
-                # 在这里处理裁剪后的图像cropped_img
                 cropped_img = new_clip_preprocess(cropped_img).unsqueeze(dim=0).to(device)
                 image_features = clip_model.encode_image(cropped_img)
                 # normalized features
