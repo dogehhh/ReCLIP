@@ -119,7 +119,7 @@ def train(rank, world_size):
             gt_cls = []
             batch_size = img.shape[0]
             for i in range(batch_size):
-                temp = pseudo_classes[ids[i]]
+                temp = [int(tensor) if isinstance(tensor, int) else int(tensor.item()) for tensor in pseudo_class[i]]
                 gt_cls.append(temp)
 
                 if len(temp) == 0:
