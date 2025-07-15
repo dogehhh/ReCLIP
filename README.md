@@ -9,7 +9,7 @@ This is the Pytorch Implementation for CVPR 2024  paper: [Learn to Rectify the B
 
 ```python
 pip install torch torchvision
-# We're using python==3.9 torch==1.11.0 and torchvision==0.12.0 
+# We're using CUDA 11.8 python==3.9 torch==2.1.0 
 ```
 
 ##### Step 2 Install CLIP
